@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Panduan Diet — Kamaruddin Abd Rahman</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f0;color:#222;font-size:15px}
+#srcScreen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:linear-gradient(160deg,#1b4332 0%,#2d6a4f 60%,#3a8a65 100%)}
+.src-card{background:white;border-radius:16px;padding:28px 24px;max-width:420px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,0.18)}
+.src-logo{text-align:center;margin-bottom:20px}
+.src-logo h1{font-size:1.15em;color:#1b4332;line-height:1.4}
+.src-logo p{font-size:0.78em;color:#666;margin-top:6px}
+.src-btn{display:block;width:100%;padding:14px 16px;border:none;border-radius:10px;font-size:0.9em;font-weight:bold;cursor:pointer;transition:all 0.2s;margin-bottom:12px;text-align:left}
+.src-btn:active{transform:scale(0.98)}
+.src-btn-primary{background:#2d6a4f;color:white}
+.src-btn-secondary{background:#f0f4f0;color:#1b4332;border:2px solid #a5d6a7}
+.src-btn .btn-icon{font-size:1.1em;margin-right:8px}
+.src-btn .btn-sub{display:block;font-size:0.72em;font-weight:normal;opacity:0.75;margin-top:2px}
+.src-divider{text-align:center;color:#aaa;font-size:0.8em;margin:4px 0 12px}
+.other-form{display:none;margin-top:4px}
+.other-form input{width:100%;padding:11px 13px;border:2px solid #a5d6a7;border-radius:8px;font-size:0.83em;outline:none;margin-bottom:8px}
+.other-form input:focus{border-color:#2d6a4f}
+.other-form .load-btn{width:100%;padding:12px;background:#2d6a4f;color:white;border:none;border-radius:8px;font-weight:bold;font-size:0.88em;cursor:pointer}
+#srcStatus{font-size:0.78em;text-align:center;margin-top:10px;min-height:18px;color:#c62828}
+#srcStatus.loading{color:#2d6a4f}
+.src-footer{font-size:0.7em;color:rgba(255,255,255,0.5);margin-top:16px;text-align:center}
+#mainApp{display:none}
+.hdr{background:linear-gradient(135deg,#1b4332,#2d6a4f);color:white;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.hdr-l h1{font-size:1em;line-height:1.3}
+.hdr-l p{font-size:0.72em;opacity:0.75;margin-top:2px}
+.hdr-r{display:flex;gap:7px;flex-shrink:0}
+.hbtn{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;padding:6px 10px;border-radius:7px;font-size:0.75em;cursor:pointer;white-space:nowrap;font-weight:bold}
+.hbtn:active{background:rgba(255,255,255,0.25)}
+.disc-top{background:#fff3cd;padding:7px 14px;text-align:center;font-size:0.76em;color:#7d5a00;font-weight:bold}
+.conds{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:7px 12px;background:#fff;border-bottom:1px solid #ddd}
+.cbadge{padding:3px 9px;border-radius:20px;font-size:0.72em;font-weight:bold}
+.c1{background:#fde8e8;color:#9b2226}.c2{background:#fff3cd;color:#7d5a00}.c3{background:#d4edda;color:#155724}.c4{background:#d1ecf1;color:#0c5460}
+.phase-bar{background:#fff8e1;border-left:5px solid #f4a500;padding:8px 14px;margin:8px 12px;border-radius:4px;font-size:0.78em;line-height:1.7}
+.phase-bar strong{color:#7d5a00}
+.swrap{padding:8px 12px 0;position:relative;z-index:200}
+.sinp{width:100%;padding:10px 14px;border:2px solid #a5d6a7;border-radius:10px;font-size:0.87em;background:white;outline:none}
+.sinp:focus{border-color:#2d6a4f}
+#sRes{display:none;position:absolute;left:12px;right:12px;top:calc(100% + 2px);background:white;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.15);max-height:240px;overflow-y:auto;z-index:300}
+.si{padding:10px 14px;border-bottom:1px solid #f0f0f0;cursor:pointer;font-size:0.81em}
+.si:last-child{border-bottom:none}
+.si:active,.si:hover{background:#e8f5e9}
+.si strong{display:block;color:#1b4332;margin-bottom:2px}
+.si span{color:#777;font-size:0.9em}
+.tabs-sticky{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid #2d6a4f;box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+.tabs{display:flex;overflow-x:auto;padding:7px 8px 0;gap:3px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{padding:8px 11px;border:none;border-radius:6px 6px 0 0;background:#e8f5e9;color:#2d6a4f;cursor:pointer;font-size:0.76em;font-weight:bold;white-space:nowrap;flex-shrink:0;min-height:40px}
+.tab-btn.active{background:#2d6a4f;color:white}
+.tc{display:none;padding:12px}
+.tc.active{display:block}
+.stitle{font-size:0.93em;font-weight:bold;color:#1b4332;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #2d6a4f;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:12px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+table{width:100%;border-collapse:collapse;background:white;min-width:460px}
+th{background:#2d6a4f;color:white;padding:8px 11px;text-align:left;font-size:0.74em;white-space:nowrap}
+td{padding:8px 11px;border-bottom:1px solid #eee;font-size:0.78em;vertical-align:top;line-height:1.4}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even){background:#f9fdf9}
+tr.hi{background:#fff9c4!important}
+tr.opa{background:#e8f5e9!important;opacity:0.75}
+tr.opd{opacity:0.15;pointer-events:none;transition:opacity 0.3s}
+.ac{white-space:nowrap}
+.badge{padding:2px 7px;border-radius:10px;font-size:0.71em;font-weight:bold;white-space:nowrap;display:inline-block}
+.bs{background:#d4edda;color:#155724}.bp{background:#d1ecf1;color:#0c5460}.bm{background:#fff3cd;color:#856404}.ba{background:#f8d7da;color:#721c24}
+.nbox{background:#fff8e1;border-left:4px solid #f4a500;padding:8px 12px;border-radius:4px;font-size:0.79em;line-height:1.6;margin-bottom:10px}
+.abox{background:#fde8e8;border-left:4px solid #c62828;padding:8px 12px;border-radius:4px;font-size:0.79em;line-height:1.6;margin-bottom:10px}
+.ibox{background:#e3f2fd;border-left:4px solid #1976d2;padding:8px 12px;border-radius:4px;font-size:0.78em;line-height:1.6;margin-bottom:10px}
+.legend{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px;font-size:0.72em;align-items:center}
+.plbl{font-size:0.79em;font-weight:bold;color:#2d6a4f;margin:12px 0 7px;padding:5px 10px;background:#e8f5e9;border-radius:6px}
+.jgrid{display:grid;grid-template-columns:1fr;gap:9px;margin-bottom:11px}
+.jcard{background:white;border-radius:10px;padding:11px 13px;box-shadow:0 2px 5px rgba(0,0,0,0.07);border-left:4px solid #2d6a4f}
+.jcard.f2{border-left-color:#1976d2}
+.jcard.opa{opacity:0.7;background:#e8f5e9}
+.jcard.opd{opacity:0.15;pointer-events:none;transition:opacity 0.3s}
+.jtime{font-size:0.73em;color:#2d6a4f;font-weight:bold;margin-bottom:3px}
+.jcard.f2 .jtime{color:#1976d2}
+.jtitle{font-size:0.86em;font-weight:bold;color:#1b4332;margin-bottom:4px}
+.jdesc{font-size:0.78em;color:#444;line-height:1.5}
+.jacts{display:flex;gap:5px;margin-top:9px}
+.btn{border:none;border-radius:6px;cursor:pointer;font-weight:bold;padding:6px 11px;font-size:0.77em;min-height:34px;transition:opacity 0.15s}
+.btn:active{opacity:0.7}
+.bg{background:#2d6a4f;color:white}
+.bb{background:#1976d2;color:white}
+.br{background:#f8d7da;color:#721c24}
+#sdot{position:fixed;top:10px;right:12px;width:10px;height:10px;border-radius:50%;background:#f4a500;z-index:9998;display:none;box-shadow:0 0 0 2px white}
+#sdot.on{display:block;animation:pu 0.8s ease-in-out infinite}
+#sdot.er{display:block;background:#c62828;animation:none}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:0.3}}
+#mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;overflow-y:auto;padding:16px}
+.mbox{background:white;border-radius:14px;max-width:540px;margin:auto;overflow:hidden}
+.mhdr{background:#2d6a4f;color:white;padding:13px 16px;display:flex;justify-content:space-between;align-items:center}
+.mhdr h3{font-size:0.93em}
+.mclose{background:none;border:none;color:white;font-size:1.4em;cursor:pointer;padding:0 4px;line-height:1}
+.mbody{padding:16px;max-height:65vh;overflow-y:auto}
+.mfield{margin-bottom:11px}
+.mfield label{display:block;font-size:0.79em;font-weight:bold;color:#1b4332;margin-bottom:4px}
+.mfield input,.mfield select,.mfield textarea{width:100%;padding:9px 11px;border:1.5px solid #c8e6c9;border-radius:7px;font-size:0.83em;background:#f9fdf9;outline:none;min-height:42px}
+.mfield textarea{min-height:70px;resize:vertical}
+.mfield input:focus,.mfield select:focus,.mfield textarea:focus{border-color:#2d6a4f}
+.mfoot{padding:11px 16px;background:#f9fdf9;display:flex;gap:8px;justify-content:flex-end;border-top:1px solid #eee}
+.mfoot .btn{padding:9px 18px;font-size:0.84em;min-height:42px}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1b4332;color:white;padding:8px 16px;border-radius:18px;font-size:0.79em;z-index:9997;opacity:0;transition:opacity 0.25s;pointer-events:none;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}
+#toast.on{opacity:1}
+#toast.er{background:#c62828}
+.fdisc{background:#fff3cd;border-top:2px solid #f4a500;padding:12px 16px;text-align:center;font-size:0.75em;color:#7d5a00;line-height:1.6;margin-top:20px}
+@media(min-width:600px){.jgrid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.jgrid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<div id="srcScreen">
+  <div class="src-card">
+    <div class="src-logo">
+      <h1>🍽️ Panduan Diet<br>Kamaruddin Abd Rahman</h1>
+      <p>Pilih sumber data untuk dipaparkan</p>
+    </div>
+    <button class="src-btn src-btn-primary" onclick="usePrimary()">
+      <span class="btn-icon">📋</span> Guna Sumber Asal
+      <span class="btn-sub">Data keluarga — boleh tambah, edit &amp; padam</span>
+    </button>
+    <div class="src-divider">atau</div>
+    <button class="src-btn src-btn-secondary" onclick="toggleOther()">
+      <span class="btn-icon">🔗</span> Guna Sumber Lain
+      <span class="btn-sub">Papar data dari Google Sheet lain (baca sahaja)</span>
+    </button>
+    <div class="other-form" id="otherForm">
+      <input type="text" id="otherUrl" placeholder="Tampal URL Google Sheet di sini..." autocomplete="off" />
+      <button class="load-btn" onclick="useOther()">Muat Data</button>
+    </div>
+    <div id="srcStatus"></div>
+  </div>
+  <div class="src-footer">⚠️ Ini adalah cadangan sahaja — bukan nasihat perubatan</div>
+</div>
+
+<div id="mainApp">
+  <div class="hdr">
+    <div class="hdr-l">
+      <h1>🍽️ Panduan Diet — Kamaruddin</h1>
+      <p id="srcLabel">Sumber Asal</p>
+    </div>
+    <div class="hdr-r">
+      <button class="hbtn" onclick="refreshAll()">🔄 Refresh</button>
+      <button class="hbtn" onclick="changeSrc()">← Tukar</button>
+    </div>
+  </div>
+  <div class="disc-top">⚠️ Cadangan sahaja — Berbincang dengan doktor atau ahli diet sebelum membuat perubahan diet</div>
+  <div class="conds">
+    <span class="cbadge c1">🔴 Metastasis Hati</span>
+    <span class="cbadge c2">🟡 Buah Pinggang 3a</span>
+    <span class="cbadge c3">🟢 Gout</span>
+    <span class="cbadge c4">🔵 Tekanan Darah Tinggi</span>
+  </div>
+  <div class="phase-bar">
+    <strong>📌 FASA 1 — SEKARANG (Bilirubin &gt; 100):</strong> Hati adalah keutamaan. Makanan mesti ringkas, lembut dan mudah diproses.<br>
+    <strong>📌 FASA 2 — Bilirubin &lt; 100:</strong> Boleh tambah pilihan perlahan-lahan. Tetap ikut peraturan buah pinggang dan gout.
+  </div>
+  <div class="swrap">
+    <input type="text" class="sinp" id="sBox" placeholder="🔍 Cari nama makanan..." autocomplete="off" oninput="doSearch()" />
+    <div id="sRes"></div>
+  </div>
+  <div class="tabs-sticky"><div class="tabs" id="tabBar"></div></div>
+  <div id="tabCon"></div>
+  <div class="fdisc">⚠️ <strong>Penafian:</strong> Panduan ini adalah cadangan sahaja. Sila berbincang dengan doktor, pakar pemakanan atau ahli diet sebelum membuat perubahan diet.</div>
+</div>
+
+<div id="sdot"></div>
+
+<div id="mov" onclick="closeMBg(event)">
+  <div class="mbox">
+    <div class="mhdr"><h3 id="mtitle">Tambah</h3><button class="mclose" onclick="closeM()">&#x2715;</button></div>
+    <div class="mbody" id="mbody"></div>
+    <div class="mfoot">
+      <button class="btn br" onclick="closeM()">Batal</button>
+      <button class="btn bg" onclick="saveM()">&#x1F4BE; Simpan</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+var MY_ID = '1gKqsJJUMfcVPRoQ5Qy0xrQYR-zdLEWiVzXoLTCjzbNk';
+var MY_GS = 'https://script.google.com/macros/s/AKfycbzYnl37BchZ7afalmreHmOFqwRO63KE9H-IvJcUKufS7-sFfZColoirs_hi94MtRuIa/exec';
+var SHEETS = ['Ikan','Ayam','Sayur','Protein','Karbohidrat','Buah','Minuman','Elakkan','Jadual'];
+var TCFG = {
+  Ikan:       {icon:'🐟',nt:'n',note:'⚠️ Cara masak wajib: Kukus, rebus atau poach SAHAJA. Tiada goreng, tiada minyak, tiada santan.'},
+  Ayam:       {icon:'🐔',nt:'n',note:'⚠️ Tanggalkan kulit sebelum masak. Masak tanpa minyak — rebus, kukus atau poach sahaja.'},
+  Sayur:      {icon:'🥦',nt:'n',note:'💡 Tips buang kalium: Potong kecil → rendam air 1-2 jam → buang air → masak. Penting untuk buah pinggang 3a.'},
+  Protein:    {icon:'🥚',nt:'i',note:'ℹ️ Tauhu SELAMAT untuk gout — kajian saintifik membuktikan purin tumbuhan tidak meningkatkan asid urik seperti purin haiwan.'},
+  Karbohidrat:{icon:'🍚',nt:'n',note:'💡 Bubur dan nasi putih adalah karbohidrat paling mudah untuk hati proses. Pilihan terbaik buat masa ini.'},
+  Buah:       {icon:'🍎',nt:'n',note:'⚠️ Banyak buah tempatan TINGGI kalium — bahaya untuk buah pinggang 3a. Pilih dengan teliti.'},
+  Minuman:    {icon:'💧',nt:'n',note:'💡 Air mineral atau air masak suam adalah pilihan utama sepanjang hari.'},
+  Elakkan:    {icon:'🚫',nt:'a',note:'⛔ Semua dalam senarai ini perlu dielakkan sepenuhnya — bukan sekadar dikurangkan.'},
+  Jadual:     {icon:'📅',nt:'n',note:'💡 Makan 5-6 kali kecil sehari lebih baik dari 3 kali besar. Kunyah perlahan.'}
+};
+var FASA_O=['Fasa 1 ✓','Fasa 1 kecil','Fasa 2 ✓','Fasa 2 →','Fasa 2 kecil','Sederhana','Hadkan','Elakkan ✗'];
+var STAT_O=['✓ Terbaik','✓ Sangat Baik','Fasa 2 ✓','Sederhana','✗ ELAKKAN','✗ ELAKKAN SELAMANYA'];
+
+var allData={}, activeId=null, canEdit=false, curM={}, sMat=[], supClose=false, syncQ=[], syncing=false;
+
+/* ── GVIZ ── */
+function gvizFetch(sid, shName) {
+  return new Promise(function(resolve, reject) {
+    var cb = '_gv' + Date.now().toString(36) + Math.random().toString(36).substr(2,4);
+    var url = 'https://docs.google.com/spreadsheets/d/' + sid
+      + '/gviz/tq?tqx=out:json;responseHandler:' + cb
+      + '&sheet=' + encodeURIComponent(shName)
+      + '&t=' + Date.now();
+    var timer = setTimeout(function(){ cleanup(); reject(new Error('Timeout — semak internet')); }, 12000);
+    function cleanup() {
+      clearTimeout(timer);
+      delete window[cb];
+      var s = document.getElementById(cb);
+      if(s) s.remove();
+    }
+    window[cb] = function(resp) {
+      cleanup();
+      if(resp.status === 'error') {
+        var msg = (resp.errors && resp.errors[0]) ? resp.errors[0].detailed_message : 'Sheet error';
+        reject(new Error(msg)); return;
+      }
+      try {
+        var t = resp.table;
+        var headers = t.cols.map(function(c){ return (c.label || c.id || '').toString(); });
+        var rows = (t.rows || []).map(function(r) {
+          return (r.c || []).map(function(cell) {
+            if(!cell || cell.v == null) return '';
+            return cell.f != null ? String(cell.f) : String(cell.v);
+          });
+        });
+        resolve({headers:headers, rows:rows});
+      } catch(e) { reject(e); }
+    };
+    var script = document.createElement('script');
+    script.id = cb;
+    script.src = url;
+    script.onerror = function(){ cleanup(); reject(new Error('Gagal sambung — pastikan sheet dikongsi "Anyone with the link"')); };
+    document.head.appendChild(script);
+  });
+}
+
+function loadAll(sid) {
+  var proms = SHEETS.map(function(name) {
+    return gvizFetch(sid, name).then(function(d){ return {name:name, d:d}; });
+  });
+  return Promise.allSettled(proms).then(function(settled) {
+    var data = {};
+    settled.forEach(function(r, i) {
+      var name = SHEETS[i];
+      if(r.status === 'fulfilled') {
+        var d = r.value.d;
+        data[name] = [d.headers].concat(d.rows);
+      } else {
+        data[name] = [];
+      }
+    });
+    return data;
+  });
+}
+
+/* ── SOURCE SELECTION ── */
+function setSrcStatus(msg, loading) {
+  var el = document.getElementById('srcStatus');
+  el.textContent = msg;
+  el.className = loading ? 'loading' : '';
+}
+
+function usePrimary() {
+  setSrcStatus('Memuatkan...', true);
+  loadAll(MY_ID).then(function(data) {
+    allData = data; activeId = MY_ID; canEdit = true;
+    document.getElementById('srcLabel').textContent = 'Sumber Asal — boleh edit';
+    launch();
+  }).catch(function(e) { setSrcStatus('Gagal: ' + e.message); });
+}
+
+function toggleOther() {
+  var f = document.getElementById('otherForm');
+  var isOpen = f.style.display === 'block';
+  f.style.display = isOpen ? 'none' : 'block';
+  if(!isOpen) document.getElementById('otherUrl').focus();
+}
+
+function useOther() {
+  var raw = document.getElementById('otherUrl').value.trim();
+  var match = raw.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
+  if(!match) { setSrcStatus('URL tidak sah — tampal URL penuh dari browser'); return; }
+  var id = match[1];
+  setSrcStatus('Memuatkan...', true);
+  loadAll(id).then(function(data) {
+    allData = data; activeId = id; canEdit = false;
+    document.getElementById('srcLabel').textContent = 'Sumber Lain — baca sahaja';
+    launch();
+  }).catch(function(e) { setSrcStatus('Gagal: ' + e.message); });
+}
+
+function launch() {
+  setSrcStatus('');
+  document.getElementById('srcScreen').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  renderAll();
+}
+
+function refreshAll() {
+  if(!activeId) return;
+  toast('🔄 Memuatkan semula...');
+  loadAll(activeId).then(function(data) {
+    allData = data; renderAll(); toast('✅ Dikemaskini!');
+  }).catch(function(e) { toast('Gagal: ' + e.message, true); });
+}
+
+function changeSrc() {
+  document.getElementById('mainApp').style.display = 'none';
+  document.getElementById('srcScreen').style.display = 'flex';
+  setSrcStatus('');
+}
+
+/* ── RENDER ── */
+function renderAll() {
+  var bar = document.getElementById('tabBar');
+  var con = document.getElementById('tabCon');
+  var curTab = (document.querySelector('.tab-btn.active') || {textContent:''}).textContent;
+  bar.innerHTML = ''; con.innerHTML = '';
+  var names = Object.keys(TCFG);
+  names.forEach(function(name, idx) {
+    var cfg = TCFG[name];
+    var isAct = curTab ? curTab.indexOf(name) >= 0 : idx === 0;
+    var btn = document.createElement('button');
+    btn.className = 'tab-btn' + (isAct ? ' active' : '');
+    btn.textContent = cfg.icon + ' ' + name;
+    btn.onclick = (function(n,b){ return function(){ showTab(n,b); }; })(name, btn);
+    bar.appendChild(btn);
+    var div = document.createElement('div');
+    div.id = 'tab-' + name;
+    div.className = 'tc' + (isAct ? ' active' : '');
+    div.innerHTML = buildTab(name, cfg);
+    con.appendChild(div);
+  });
+}
+
+function buildTab(name, cfg) {
+  var sd = allData[name] || [];
+  var hdr = sd[0] || [];
+  var rows = sd.slice(1);
+  var bc = cfg.nt === 'a' ? 'abox' : cfg.nt === 'i' ? 'ibox' : 'nbox';
+  var h = '<div class="stitle">' + cfg.icon + ' ' + name
+    + (canEdit ? '<button class="btn bg" onclick="openAdd(\''+name+'\')">&#x2795; Tambah</button>' : '')
+    + '</div>'
+    + '<div class="' + bc + '">' + cfg.note + '</div>';
+  if(name === 'Jadual') return h + buildJadual(hdr, rows, name);
+  h += '<div class="legend">'
+    + '<span><span class="badge bs">Fasa 1 ✓</span> Selamat</span>'
+    + '<span><span class="badge bp">Fasa 2 →</span> Selepas bilirubin turun</span>'
+    + '<span><span class="badge bm">Sederhana</span></span>'
+    + '<span><span class="badge ba">Elakkan ✗</span></span>'
+    + '</div>';
+  return h + buildTbl(name, hdr, rows);
+}
+
+function buildTbl(name, hdr, rows) {
+  if(!hdr.length) return '<p style="color:#888;font-size:0.85em;padding:10px 0">Tiada data.</p>';
+  var h = '<div class="tw"><table id="tbl-'+name+'">'
+    + '<tr>' + hdr.map(function(x){ return '<th>'+eh(x)+'</th>'; }).join('') + (canEdit?'<th style="width:72px"></th>':'') + '</tr>';
+  rows.forEach(function(row, i) { h += trHtml(name, i+2, row, hdr); });
+  return h + '</table></div>';
+}
+
+function trHtml(name, sr, row, hdr) {
+  var cells = row.map(function(c,ci){
+    var hl = (hdr[ci]||'').toLowerCase();
+    return '<td>' + ((hl.indexOf('fasa')>=0||hl==='status') ? mkBadge(c) : eh(c)) + '</td>';
+  }).join('');
+  var acts = '';
+  if(canEdit) {
+    var rowJs = '[' + row.map(function(c){ return '`'+ej(c)+'`'; }).join(',') + ']';
+    acts = '<td class="ac">'
+      + '<button class="btn bb" style="margin-right:3px" onclick="openEdit(\''+name+'\','+sr+','+rowJs+')">&#x270F;</button>'
+      + '<button class="btn br" onclick="doDel(\''+name+'\','+sr+',this)">&#x1F5D1;</button>'
+      + '</td>';
+  }
+  return '<tr data-sheet="'+name+'" data-row="'+sr+'">' + cells + acts + '</tr>';
+}
+
+function buildJadual(hdr, rows, name) {
+  var f1 = rows.filter(function(r){ return String(r[3])==='1'; });
+  var f2 = rows.filter(function(r){ return String(r[3])==='2'; });
+  function card(row) {
+    var sr = rows.indexOf(row) + 2;
+    var acts = '';
+    if(canEdit) {
+      var rowJs = '[' + row.map(function(c){ return '`'+ej(c)+'`'; }).join(',') + ']';
+      acts = '<div class="jacts">'
+        + '<button class="btn bb" onclick="openEdit(\''+name+'\','+sr+','+rowJs+')">&#x270F; Edit</button>'
+        + '<button class="btn br" onclick="doDel(\''+name+'\','+sr+',this)">&#x1F5D1; Padam</button>'
+        + '</div>';
+    }
+    return '<div class="jcard ' + (String(row[3])==='2'?'f2':'') + '" data-sheet="'+name+'" data-row="'+sr+'">'
+      + '<div class="jtime">'+eh(row[0]||'')+'</div>'
+      + '<div class="jtitle">'+eh(row[1]||'')+'</div>'
+      + '<div class="jdesc">'+eh(row[2]||'')+'</div>'
+      + acts + '</div>';
+  }
+  var h = '';
+  if(f1.length) h += '<div class="plbl">📌 Fasa 1 — Sekarang</div><div class="jgrid">'+f1.map(card).join('')+'</div>';
+  if(f2.length) h += '<div class="plbl" style="background:#e3f2fd;color:#0c5460">📌 Fasa 2 — Apabila Bilirubin &lt; 100</div><div class="jgrid">'+f2.map(card).join('')+'</div>';
+  if(!rows.length) h = '<p style="color:#888;font-size:0.85em;padding:10px 0">Tiada jadual.</p>';
+  return h + '<div class="nbox" style="margin-top:12px">'
+    + '<strong>⚠️ Peraturan Wajib Semua Fasa:</strong><br>'
+    + '✅ Garam min | ✅ Tiada minyak | ✅ Minum air perlahan sepanjang hari | ✅ Tiada suplemen | ✅ Keladi tikus — BERHENTI SELAMANYA'
+    + '</div>';
+}
+
+/* ── MODAL ── */
+function openAdd(sh) {
+  var hdr = (allData[sh]||[[]])[0]||[];
+  curM = {mode:'add',sh:sh,sr:null,hdr:hdr};
+  document.getElementById('mtitle').textContent = '➕ Tambah — '+sh;
+  document.getElementById('mbody').innerHTML = mkFields(hdr,[]);
+  document.getElementById('mov').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function openEdit(sh, sr, row) {
+  var hdr = (allData[sh]||[[]])[0]||[];
+  curM = {mode:'edit',sh:sh,sr:sr,hdr:hdr};
+  document.getElementById('mtitle').textContent = '✏️ Edit — '+sh;
+  document.getElementById('mbody').innerHTML = mkFields(hdr,row);
+  document.getElementById('mov').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function mkFields(hdr, vals) {
+  return hdr.map(function(h,i) {
+    var v = vals[i]!==undefined ? String(vals[i]) : '';
+    var hl = h.toLowerCase();
+    var isLong = ['penerangan','sebab','manfaat','kenapa','cara'].some(function(k){ return hl.indexOf(k)>=0; });
+    var inp;
+    if(hl==='fasa') inp='<select id="mf'+i+'">'+FASA_O.map(function(o){ return '<option'+(v===o?' selected':'')+'>'+o+'</option>'; }).join('')+'</select>';
+    else if(hl==='status') inp='<select id="mf'+i+'">'+STAT_O.map(function(o){ return '<option'+(v===o?' selected':'')+'>'+o+'</option>'; }).join('')+'</select>';
+    else if(isLong) inp='<textarea id="mf'+i+'">'+eh(v)+'</textarea>';
+    else inp='<input type="text" id="mf'+i+'" value="'+eh(v)+'">';
+    return '<div class="mfield"><label>'+h+'</label>'+inp+'</div>';
+  }).join('');
+}
+function saveM() {
+  var sh=curM.sh, sr=curM.sr, hdr=curM.hdr, mode=curM.mode;
+  var row = hdr.map(function(_,i){ var e=document.getElementById('mf'+i); return e?e.value.trim():''; });
+  if(!row[0]){ toast('Sila isi sekurang-kurangnya medan pertama.',true); return; }
+  closeM();
+  if(mode==='add') opAdd(sh,row,hdr); else opEdit(sh,sr,row);
+}
+function closeM(){ document.getElementById('mov').style.display='none'; document.body.style.overflow=''; }
+function closeMBg(e){ if(e.target===document.getElementById('mov')) closeM(); }
+
+/* ── OPTIMISTIC WRITES ── */
+function opAdd(sh, row, hdr) {
+  if(!allData[sh]) allData[sh]=[hdr];
+  allData[sh].push(row);
+  renderAll();
+  setTimeout(function(){
+    var rows=document.querySelectorAll('[data-sheet="'+sh+'"]');
+    var last=rows[rows.length-1];
+    if(last){last.classList.add('opa');last.scrollIntoView({behavior:'smooth',block:'center'});}
+  },60);
+  toast('✅ Ditambah!');
+  qSync(function(){
+    return apiFetch('action=add&sheet='+enc(sh)+'&data='+enc(JSON.stringify(row)))
+      .then(function(){ return silentRef(sh); });
+  });
+}
+function opEdit(sh, sr, row) {
+  var sd=allData[sh]||[[]];
+  if(sd[sr-1]) sd[sr-1]=row;
+  renderAll();
+  setTimeout(function(){
+    var el=document.querySelector('[data-sheet="'+sh+'"][data-row="'+sr+'"]');
+    if(el){el.classList.add('hi');el.scrollIntoView({behavior:'smooth',block:'center'});}
+  },60);
+  toast('✅ Dikemaskini!');
+  qSync(function(){
+    return apiFetch('action=edit&sheet='+enc(sh)+'&row='+sr+'&data='+enc(JSON.stringify(row)))
+      .then(function(){ return silentRef(sh); });
+  });
+}
+function doDel(sh, sr, btn) {
+  if(!confirm('Padam item ini dari senarai '+sh+'?')) return;
+  var el=btn.closest('[data-row]');
+  if(el){el.classList.add('opd');setTimeout(function(){el.remove();},320);}
+  var sd=allData[sh];
+  if(sd) sd.splice(sr-1,1);
+  toast('🗑️ Dipadam!');
+  qSync(function(){
+    return apiFetch('action=delete&sheet='+enc(sh)+'&row='+sr)
+      .then(function(){ return silentRef(sh); });
+  });
+}
+
+/* ── APPS SCRIPT FETCH (writes only) ── */
+function apiFetch(params, retries) {
+  retries = retries || 2;
+  var url = MY_GS + '?' + params + '&t=' + Date.now();
+  function attempt(i) {
+    return fetch(url, {redirect:'follow'}).then(function(r){
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r.text();
+    }).then(function(txt){
+      if(txt.trim().charAt(0)==='<') throw new Error('Script returned HTML');
+      var j=JSON.parse(txt);
+      if(j.error) throw new Error(j.error);
+      return j;
+    }).catch(function(e){
+      if(i>=retries) throw e;
+      return new Promise(function(res){ setTimeout(res, 600*(i+1)); }).then(function(){ return attempt(i+1); });
+    });
+  }
+  return attempt(0);
+}
+
+/* ── SYNC QUEUE ── */
+function qSync(task){ syncQ.push(task); if(!syncing) procQ(); }
+function procQ() {
+  if(!syncQ.length){ hideDot(); syncing=false; return; }
+  syncing=true; showDot();
+  var t=syncQ.shift();
+  t().catch(function(e){ showDot('er'); toast('Ralat simpan: '+e.message,true); }).then(function(){ procQ(); });
+}
+function silentRef(shName) {
+  return gvizFetch(activeId, shName).then(function(d){
+    allData[shName]=[d.headers].concat(d.rows);
+    var aName=(document.querySelector('.tab-btn.active')||{textContent:''}).textContent;
+    if(aName.indexOf(shName)>=0 && TCFG[shName]) {
+      var div=document.getElementById('tab-'+shName);
+      if(div) div.innerHTML=buildTab(shName,TCFG[shName]);
+    }
+  }).catch(function(){});
+}
+function showDot(s){ document.getElementById('sdot').className=s==='er'?'er':'on'; }
+function hideDot(){ document.getElementById('sdot').className=''; }
+
+/* ── TAB ── */
+function showTab(name, el) {
+  document.querySelectorAll('.tc').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  var t=document.getElementById('tab-'+name);
+  if(t) t.classList.add('active');
+  if(el){ el.classList.add('active'); el.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }
+  closeSearch();
+}
+
+/* ── SEARCH ── */
+function doSearch() {
+  var q=document.getElementById('sBox').value.toLowerCase().trim();
+  var res=document.getElementById('sRes');
+  if(q.length<2){closeSearch();return;}
+  sMat=[];
+  Object.keys(allData).forEach(function(sh){
+    var sd=allData[sh];
+    if(!sd||!sd.length) return;
+    sd.slice(1).forEach(function(row,i){
+      if(row.join(' ').toLowerCase().indexOf(q)>=0)
+        sMat.push({sh:sh,sr:i+2,name:row[0]||'',info:row[1]||''});
+    });
+  });
+  res.innerHTML = sMat.length
+    ? sMat.map(function(m,i){
+        return '<div class="si" onmousedown="supClose=true" onclick="goRes('+i+')">'
+          +'<strong>'+eh(m.name)+'</strong>'
+          +'<span>'+eh(m.sh)+' — '+eh(m.info.substring(0,55))+(m.info.length>55?'...':'')+'</span>'
+          +'</div>';
+      }).join('')
+    : '<div class="si" style="color:#888;font-style:italic">Tiada hasil untuk "'+eh(q)+'"</div>';
+  res.style.display='block';
+}
+function goRes(i) {
+  var m=sMat[i]; closeSearch();
+  document.getElementById('sBox').value='';
+  document.querySelectorAll('#tabBar button').forEach(function(btn){
+    if(btn.textContent.indexOf(m.sh)>=0) showTab(m.sh,btn);
+  });
+  setTimeout(function(){
+    var el=document.querySelector('[data-sheet="'+m.sh+'"][data-row="'+m.sr+'"]');
+    if(el){el.classList.add('hi');el.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){el.classList.remove('hi');},2500);}
+  },100);
+}
+function closeSearch(){ document.getElementById('sRes').style.display='none'; supClose=false; }
+
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('sBox').addEventListener('blur', function(){
+    if(supClose){supClose=false;return;}
+    setTimeout(closeSearch,150);
+  });
+});
+
+/* ── BADGE ── */
+function mkBadge(v) {
+  var s=(v||'').toString().toLowerCase(),c='bm';
+  if(s.indexOf('fasa 1')>=0||s.indexOf('terbaik')>=0||s.indexOf('sangat baik')>=0) c='bs';
+  else if(s.indexOf('elakkan')>=0||s.charAt(0)==='✗') c='ba';
+  else if(s.indexOf('fasa 2')>=0) c='bp';
+  return '<span class="badge '+c+'">'+eh(v)+'</span>';
+}
+
+/* ── TOAST ── */
+var tT;
+function toast(msg,err){
+  var t=document.getElementById('toast');
+  t.textContent=msg; t.className='on'+(err?' er':'');
+  clearTimeout(tT); tT=setTimeout(function(){t.className='';},2600);
+}
+
+/* ── UTILS ── */
+function eh(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function ej(s){ return String(s).replace(/\\/g,'\\\\').replace(/`/g,'\\`').replace(/\$/g,'\\$').replace(/\n/g,'\\n'); }
+function enc(s){ return encodeURIComponent(s); }
+</script>
+</body>
+</html>
